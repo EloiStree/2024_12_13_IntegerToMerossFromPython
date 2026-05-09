@@ -2,14 +2,28 @@
 Code design for the girls of Girleek during a workshop on python.
 """
 
-EMAIL = 'YOUR_MEROSS_EMAIL'
-PASSWORD = 'YOUR_MEROSS_PASSWORD'
+
+# pip install meross-iot
+
+EMAIL = 'streeeloi@gmail.com'
+PASSWORD = 'Meross123'
 
 import asyncio
 import os
 from meross_iot.http_api import MerossHttpClient
 from meross_iot.manager import MerossManager
+
 import socket
+import sys
+
+
+
+# use params to  email and password
+
+if len(sys.argv) > 1:
+    EMAIL = sys.argv[1]
+if len(sys.argv) > 2:
+    PASSWORD = sys.argv[2]
 
 
 async def main():
@@ -22,7 +36,7 @@ async def main():
                                                                       email=EMAIL, 
                                                                       password=PASSWORD)
     udp_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-    udp_socket.bind(('', 3615))
+    udp_socket.bind(('', 7041))
    
     manager = MerossManager(http_client=http_api_client)
     await manager.async_init()
